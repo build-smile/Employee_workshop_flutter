@@ -11,5 +11,6 @@ class _EmployeeListState extends State<EmployeeList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold();
+    //TODO design ListTile
   }
 }
