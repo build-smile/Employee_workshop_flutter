@@ -64,9 +64,10 @@ class _EmployeeFormState extends State<EmployeeForm> {
                     setState(() {});
                   },
                   child: Text(
-                    DateFormat.yMMMMEEEEd().format(
-                      widget.employee.staredDate ?? DateTime.now(),
-                    ),
+                    widget.employee.staredDate != null
+                        ? DateFormat.yMMMMEEEEd()
+                            .format(widget.employee.staredDate!)
+                        : 'Choose Date',
                   ),
                 )),
             ListTile(
@@ -79,11 +80,11 @@ class _EmployeeFormState extends State<EmployeeForm> {
                   widget.employee.endedDate = await getDatePicker();
                   setState(() {});
                 },
-                child: Text(
-                  DateFormat.yMMMMEEEEd().format(
-                    widget.employee.endedDate ?? DateTime.now(),
-                  ),
-                ),
+                child: Text(widget.employee.endedDate != null
+                    ? DateFormat.yMMMMEEEEd().format(
+                        widget.employee.endedDate!,
+                      )
+                    : 'Choose Date'),
               ),
             ),
             ListTile(
