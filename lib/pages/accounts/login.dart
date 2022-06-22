@@ -39,6 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   submit(String username, String password) {
     print('username: $username passname: $password');
-    Navigator.pushNamed(context, '/home');
+
+    Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
   }
 }

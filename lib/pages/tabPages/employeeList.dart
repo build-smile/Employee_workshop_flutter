@@ -1,3 +1,4 @@
+import 'package:employee_workshop/models/employee.dart';
 import 'package:flutter/material.dart';
 
 class EmployeeList extends StatefulWidget {
@@ -10,7 +11,28 @@ class EmployeeList extends StatefulWidget {
 class _EmployeeListState extends State<EmployeeList> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
-    //TODO design ListTile
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: 20,
+        itemBuilder: (BuildContext context, int i) {
+          Employee employee = Employee();
+          return ListTile(
+            leading: Text('ff'),
+            title: Text('Build'),
+            subtitle: Text('ddd'),
+            trailing: Text('fef'),
+            onTap: () {
+              Navigator.pushNamed(context, '/edit', arguments: employee);
+            },
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/add');
+        },
+        child: Icon(Icons.add),
+      ),
+    );
   }
 }
