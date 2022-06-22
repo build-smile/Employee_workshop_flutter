@@ -1,3 +1,4 @@
+import 'package:employee_workshop/pages/AddEmployee.dart';
 import 'package:employee_workshop/pages/accounts/login.dart';
 import 'package:employee_workshop/pages/accounts/register.dart';
 import 'package:employee_workshop/pages/home.dart';
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         '/register': (context) => RegisterScreen(),
-        '/home': (context) => HomeScreen()
+        '/home': (context) => HomeScreen(),
+        '/add': (context) => AddEmployeeScreen()
       },
       home: LoginScreen(),
     );
