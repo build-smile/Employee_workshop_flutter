@@ -1,3 +1,4 @@
+import 'package:employee_workshop/utils/LocalStorage.dart';
 import 'package:flutter/material.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -12,12 +13,15 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     return Center(
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamedAndRemoveUntil(
-              context, '/login', (route) => false);
-        },
+        onPressed: _logout,
         child: Text('Log out'),
       ),
     );
+  }
+
+  _logout() async {
+    LocalStorage localStorage = LocalStorage();
+    localStorage.removeToken();
+    Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
   }
 }

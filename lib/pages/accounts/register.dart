@@ -1,5 +1,9 @@
 import 'package:employee_workshop/components/UserForm.dart';
+import 'package:employee_workshop/models/httpStatusMsg.dart';
+import 'package:employee_workshop/services/UserService.dart';
+import 'package:employee_workshop/utils/AlertBar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -22,8 +26,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  submit(String username, String password) {
+  submit(String username, String password) async {
     print('username: $username passname: $password');
-    Navigator.pop(context);
+    UserService userService = UserService();
+    EasyLoading.show(status: 'Loading..');
+    HttpStatusMsg result =
+        await userService.register(username: username, password: password);
+    if (result.success) {
+      AlertBar.show(context: context, msg: 'Registered');
+      Navigator.pop(context);
+    } else {
+      AlertBar.show(
+        context: context,
+        msg: result.errorMsg!,
+        isError: true,
+      );
+    }
+    EasyLoading.dismiss();
   }
 }

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:employee_workshop/models/employee.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class EmployeeForm extends StatefulWidget {
@@ -26,19 +25,6 @@ class _EmployeeFormState extends State<EmployeeForm> {
   TextStyle lableStyle = TextStyle(
     fontWeight: FontWeight.bold,
   );
-  File? _imageFile;
-
-  bool isHasNetworkImage = true;
-
-  Future<void> _openImagePicker() async {
-    final XFile? pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      setState(() {
-        _imageFile = File(pickedImage.path);
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,30 +107,6 @@ class _EmployeeFormState extends State<EmployeeForm> {
                 },
               ),
             ),
-            Container(
-              height: 300,
-              width: 300,
-              // color: Colors.grey,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[400],
-                  ),
-                  onPressed: () {
-                    _openImagePicker();
-                  },
-                  child: _displayImage()),
-            ),
-            Visibility(
-                visible: isHasNetworkImage || _imageFile != null,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.red),
-                  onPressed: () {
-                    _imageFile = null;
-                    isHasNetworkImage = false;
-                    setState(() {});
-                  },
-                  child: Text('Delete Image'),
-                )),
             ListTile(
               title: ElevatedButton(
                 onPressed: () {
@@ -160,17 +122,6 @@ class _EmployeeFormState extends State<EmployeeForm> {
         ),
       ),
     );
-  }
-
-  Widget _displayImage() {
-    if (_imageFile != null) {
-      return Image.file(_imageFile!);
-    } else if (isHasNetworkImage) {
-      return Image.network(
-          'https://png.pngtree.com/element_our/png/20181009/thai-cat-cream-tabby-sitting-png_131622.jpg');
-    } else {
-      return Text('Please Upload your Image');
-    }
   }
 
   String? _validateString(String? value) {

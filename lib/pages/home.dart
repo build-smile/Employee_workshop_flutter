@@ -13,9 +13,10 @@ final tabs = [
   const EmployeeList(),
   const SettingScreen(),
 ];
-int _currentIndex = 0;
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,9 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: _onItemTapped,
       ),
     );
-    //TODO 2 TAB
-    //tab 1 listview data
-    //tab 2 setting
   }
 
   void _onItemTapped(int index) {
