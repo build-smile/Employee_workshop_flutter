@@ -1,7 +1,7 @@
 import 'package:employee_workshop/models/employee.dart';
 import 'package:flutter/material.dart';
 
-import '../components/EmployeeForm.dart';
+import '../components/StockForm.dart';
 
 class AddEmployeeScreen extends StatefulWidget {
   const AddEmployeeScreen({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
       ),
       body: ListView(children: [
         Container(
-          child: EmployeeForm(
+          child: StockForm(
             employee: Employee(),
             buttonLabel: 'Submit',
             submit: _submit,

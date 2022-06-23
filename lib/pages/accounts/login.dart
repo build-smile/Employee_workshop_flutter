@@ -2,6 +2,7 @@ import 'package:employee_workshop/components/UserForm.dart';
 import 'package:employee_workshop/models/httpStatusMsg.dart';
 import 'package:employee_workshop/services/UserService.dart';
 import 'package:employee_workshop/utils/AlertBar.dart';
+import 'package:employee_workshop/utils/LoadingProgress.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -44,18 +45,17 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   submit(String username, String password) async {
-    UserService userService = UserService();
-    HttpStatusMsg result = HttpStatusMsg();
-    EasyLoading.show(status: 'Loading..');
-    result = await userService.login(username: username, password: password);
-
-    if (result.success) {
-      LocalStorage().storeToken('${result.result}');
-      AlertBar.show(context: context, msg: 'Welcome to My App');
-      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
-    } else {
-      AlertBar.show(context: context, msg: result.errorMsg!, isError: true);
-    }
-    EasyLoading.dismiss();
+    LoadingProgress.inProgress(() async {
+      UserService userService = UserService();
+      HttpStatusMsg result = HttpStatusMsg();
+      result = await userService.login(username: username, password: password);
+      if (result.success) {
+        LocalStorage().storeToken('${result.result}');
+        AlertBar.show(context: context, msg: 'Welcome to My App');
+        Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+      } else {
+        AlertBar.show(context: context, msg: result.errorMsg!, isError: true);
+      }
+    });
   }
 }

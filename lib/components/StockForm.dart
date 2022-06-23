@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-class EmployeeForm extends StatefulWidget {
+class StockForm extends StatefulWidget {
   final String buttonLabel;
   final Function submit;
   Employee employee;
-  EmployeeForm(
+  StockForm(
       {Key? key,
       required this.buttonLabel,
       required this.submit,
@@ -17,10 +17,10 @@ class EmployeeForm extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<EmployeeForm> createState() => _EmployeeFormState();
+  State<StockForm> createState() => _StockFormState();
 }
 
-class _EmployeeFormState extends State<EmployeeForm> {
+class _StockFormState extends State<StockForm> {
   final _keyform = GlobalKey<FormState>();
   TextStyle lableStyle = TextStyle(
     fontWeight: FontWeight.bold,
