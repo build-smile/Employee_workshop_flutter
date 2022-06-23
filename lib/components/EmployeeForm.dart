@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:employee_workshop/models/employee.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class EmployeeForm extends StatefulWidget {
@@ -22,10 +26,22 @@ class _EmployeeFormState extends State<EmployeeForm> {
   TextStyle lableStyle = TextStyle(
     fontWeight: FontWeight.bold,
   );
+  File? _imageFile;
+
+  bool isHasNetworkImage = true;
+
+  Future<void> _openImagePicker() async {
+    final XFile? pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        _imageFile = File(pickedImage.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    //setState((){});
     return Container(
       margin: EdgeInsets.all(10),
       child: Form(
@@ -34,6 +50,7 @@ class _EmployeeFormState extends State<EmployeeForm> {
           children: [
             ListTile(
               title: TextFormField(
+                initialValue: widget.employee.firstName,
                 onSaved: (String? value) => widget.employee.firstName = value!,
                 validator: _validateString,
                 decoration: InputDecoration(labelText: 'Firstname'),
@@ -41,6 +58,7 @@ class _EmployeeFormState extends State<EmployeeForm> {
             ),
             ListTile(
               title: TextFormField(
+                initialValue: widget.employee.lastName,
                 onSaved: (String? value) => widget.employee.lastName = value!,
                 validator: _validateString,
                 decoration: InputDecoration(labelText: 'Lastname'),
@@ -48,28 +66,37 @@ class _EmployeeFormState extends State<EmployeeForm> {
             ),
             ListTile(
               title: TextFormField(
+                initialValue: widget.employee.position,
                 onSaved: (String? value) => widget.employee.position = value!,
                 validator: _validateString,
                 decoration: InputDecoration(labelText: 'Position'),
               ),
             ),
             ListTile(
-                leading: Text(
-                  'Start Date',
-                  style: lableStyle,
+              leading: Text(
+                'Start Date',
+                style: lableStyle,
+              ),
+              title: TextButton(
+                onPressed: () async {
+                  widget.employee.staredDate = await getDatePicker();
+                  setState(() {});
+                },
+                child: Text(
+                  widget.employee.staredDate != null
+                      ? DateFormat.yMMMMEEEEd()
+                          .format(widget.employee.staredDate!)
+                      : 'Choose Date',
                 ),
-                title: TextButton(
-                  onPressed: () async {
-                    widget.employee.staredDate = await getDatePicker();
-                    setState(() {});
-                  },
-                  child: Text(
-                    widget.employee.staredDate != null
-                        ? DateFormat.yMMMMEEEEd()
-                            .format(widget.employee.staredDate!)
-                        : 'Choose Date',
-                  ),
-                )),
+              ),
+              trailing: IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  widget.employee.staredDate = null;
+                  setState(() {});
+                },
+              ),
+            ),
             ListTile(
               leading: Text(
                 'End Date',
@@ -86,7 +113,38 @@ class _EmployeeFormState extends State<EmployeeForm> {
                       )
                     : 'Choose Date'),
               ),
+              trailing: IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  widget.employee.endedDate = null;
+                  setState(() {});
+                },
+              ),
             ),
+            Container(
+              height: 300,
+              width: 300,
+              // color: Colors.grey,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey[400],
+                  ),
+                  onPressed: () {
+                    _openImagePicker();
+                  },
+                  child: _displayImage()),
+            ),
+            Visibility(
+                visible: isHasNetworkImage || _imageFile != null,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.red),
+                  onPressed: () {
+                    _imageFile = null;
+                    isHasNetworkImage = false;
+                    setState(() {});
+                  },
+                  child: Text('Delete Image'),
+                )),
             ListTile(
               title: ElevatedButton(
                 onPressed: () {
@@ -97,11 +155,22 @@ class _EmployeeFormState extends State<EmployeeForm> {
                 },
                 child: Text(widget.buttonLabel),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
+  }
+
+  Widget _displayImage() {
+    if (_imageFile != null) {
+      return Image.file(_imageFile!);
+    } else if (isHasNetworkImage) {
+      return Image.network(
+          'https://png.pngtree.com/element_our/png/20181009/thai-cat-cream-tabby-sitting-png_131622.jpg');
+    } else {
+      return Text('Please Upload your Image');
+    }
   }
 
   String? _validateString(String? value) {

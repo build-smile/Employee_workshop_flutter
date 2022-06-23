@@ -27,6 +27,7 @@ class _EditEmployeeScreenState extends State<EditEmployeeScreen> {
               submit: _submit,
             ),
           ),
+          TextButton(onPressed: () {}, child: Text('Remove'))
         ],
       ),
     );

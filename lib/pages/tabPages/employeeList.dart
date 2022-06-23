@@ -13,16 +13,26 @@ class _EmployeeListState extends State<EmployeeList> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-        itemCount: 20,
+        itemCount: 5,
         itemBuilder: (BuildContext context, int i) {
-          Employee employee = Employee();
+          Employee employee = Employee(
+            firstName: 'Nat',
+            lastName: 'Hee',
+            position: 'Hee',
+            staredDate: DateTime.now(),
+            endedDate: DateTime.now(),
+          );
           return ListTile(
             leading: Text('ff'),
             title: Text('Build'),
             subtitle: Text('ddd'),
             trailing: Text('fef'),
             onTap: () {
-              Navigator.pushNamed(context, '/edit', arguments: employee);
+              Navigator.pushNamed(
+                context,
+                '/edit',
+                arguments: employee,
+              );
             },
           );
         },
