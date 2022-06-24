@@ -39,7 +39,14 @@ dependencies:
   flutter_easyloading: ^3.0.5
   shared_preferences: ^2.0.15
   pull_to_refresh: ^2.0.0
+  flutter_launcher_icons: ^0.9.3
 
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path_android: "assets/images/inventory.png"
+  image_path_ios: "assets/images/inventory.png"
 
 
 dev_dependencies:
@@ -65,8 +72,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

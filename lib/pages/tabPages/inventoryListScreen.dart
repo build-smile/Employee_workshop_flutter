@@ -1,6 +1,5 @@
 import 'package:employee_workshop/models/inventory.dart';
 import 'package:employee_workshop/services/InventoryService.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -15,7 +14,6 @@ class InventoryListScreen extends StatefulWidget {
 class _InventoryListScreenState extends State<InventoryListScreen> {
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
-  List<String> items = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
   void _onRefresh() async {
     // monitor network fetch

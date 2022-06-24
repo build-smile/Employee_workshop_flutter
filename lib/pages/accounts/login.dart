@@ -1,7 +1,7 @@
 import 'package:employee_workshop/components/UserForm.dart';
 import 'package:employee_workshop/models/httpStatusMsg.dart';
 import 'package:employee_workshop/services/UserService.dart';
-import 'package:employee_workshop/utils/AlertBar.dart';
+import 'package:employee_workshop/utils/AlertHelper.dart';
 import 'package:employee_workshop/utils/LoadingProgress.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               height: 200,
               margin: EdgeInsets.all(30),
-              child: FlutterLogo(),
+              child: Image.asset('assets/images/Inventory.png'),
             ),
             Container(
               child: UserForm(

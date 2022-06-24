@@ -1,7 +1,7 @@
 import 'package:employee_workshop/models/httpStatusMsg.dart';
 import 'package:employee_workshop/models/inventory.dart';
 import 'package:employee_workshop/services/InventoryService.dart';
-import 'package:employee_workshop/utils/AlertBar.dart';
+import 'package:employee_workshop/utils/AlertHelper.dart';
 import 'package:employee_workshop/utils/LoadingProgress.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +19,7 @@ class _AddInventoryScreenState extends State<AddInventoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Employee Form'),
+        title: Text('Add Stock Form'),
       ),
       body: ListView(children: [
         Container(

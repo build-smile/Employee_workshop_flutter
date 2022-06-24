@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../components/StockForm.dart';
 import '../models/httpStatusMsg.dart';
 import '../services/InventoryService.dart';
-import '../utils/AlertBar.dart';
+import '../utils/AlertHelper.dart';
 import '../utils/LoadingProgress.dart';
 
 class EditInventoryScreen extends StatefulWidget {
