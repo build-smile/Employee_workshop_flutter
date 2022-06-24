@@ -33,10 +33,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     HttpStatusMsg result =
         await userService.register(username: username, password: password);
     if (result.success) {
-      AlertBar.show(context: context, msg: 'Registered');
+      AlertHelper.showBar(context: context, msg: 'Registered');
       Navigator.pop(context);
     } else {
-      AlertBar.show(
+      AlertHelper.showBar(
         context: context,
         msg: result.errorMsg!,
         isError: true,

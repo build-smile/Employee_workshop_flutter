@@ -1,5 +1,5 @@
 import 'package:employee_workshop/pages/tabPages/settingScreen.dart';
-import 'package:employee_workshop/pages/tabPages/employeeList.dart';
+import 'package:employee_workshop/pages/tabPages/inventoryListScreen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,7 +10,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 final tabs = [
-  const EmployeeList(),
+  const InventoryListScreen(),
   const SettingScreen(),
 ];
 
@@ -21,7 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Employee'),
+        leading: Icon(Icons.inventory),
+        title: Text('Inventory'),
       ),
       body: tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(

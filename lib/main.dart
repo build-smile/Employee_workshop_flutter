@@ -1,7 +1,7 @@
-import 'package:employee_workshop/pages/addEmployee.dart';
+import 'package:employee_workshop/pages/addInventory.dart';
 import 'package:employee_workshop/pages/accounts/login.dart';
 import 'package:employee_workshop/pages/accounts/register.dart';
-import 'package:employee_workshop/pages/editEmployee.dart';
+import 'package:employee_workshop/pages/editInventory.dart';
 import 'package:employee_workshop/pages/home.dart';
 import 'package:employee_workshop/utils/LocalStorage.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegisterScreen(),
         '/login': (context) => LoginScreen(),
         '/home': (context) => HomeScreen(),
-        '/add': (context) => AddEmployeeScreen(),
-        '/edit': (context) => EditEmployeeScreen()
+        '/add': (context) => AddInventoryScreen(),
+        '/edit': (context) => EditInventoryScreen()
       },
       builder: EasyLoading.init(),
       home: FutureBuilder(

@@ -51,10 +51,11 @@ class _LoginScreenState extends State<LoginScreen> {
       result = await userService.login(username: username, password: password);
       if (result.success) {
         LocalStorage().storeToken('${result.result}');
-        AlertBar.show(context: context, msg: 'Welcome to My App');
+        AlertHelper.showBar(context: context, msg: 'Welcome to My App');
         Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
       } else {
-        AlertBar.show(context: context, msg: result.errorMsg!, isError: true);
+        AlertHelper.showBar(
+            context: context, msg: result.errorMsg!, isError: true);
       }
     });
   }

@@ -1,3 +1,4 @@
+import 'package:employee_workshop/utils/AlertBar.dart';
 import 'package:employee_workshop/utils/LocalStorage.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +21,16 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   _logout() async {
-    LocalStorage localStorage = LocalStorage();
-    localStorage.removeToken();
-    Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+    AlertHelper.alertPopup(
+      context: context,
+      closeAuto: false,
+      function: () {
+        LocalStorage localStorage = LocalStorage();
+        localStorage.removeToken();
+        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+      },
+      desc: 'Are you sure want to Logout',
+      title: 'Logout',
+    );
   }
 }
